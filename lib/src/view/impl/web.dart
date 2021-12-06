@@ -357,12 +357,12 @@ class _WebViewXState extends State<WebViewX> {
       ..style.border = 'none'
       ..allowFullscreen = widget.webSpecificParams.webAllowFullscreenContent;
 
-    if(widget.maxWidth != double.infinity) {
-      iframeElement.width = widget.maxWidth.toInt().toString();
-    }
-    if(widget.maxHeight != double.infinity) {
-      iframeElement.height = widget.maxHeight.toInt().toString();
-    }
+    // if(widget.maxWidth != double.infinity) {
+    //   iframeElement.width = widget.maxWidth.toInt().toString();
+    // }
+    // if(widget.maxHeight != double.infinity) {
+    //   iframeElement.height = widget.maxHeight.toInt().toString();
+    // }
 
     widget.webSpecificParams.additionalSandboxOptions.forEach(
       iframeElement.sandbox!.add,
