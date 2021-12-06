@@ -7,13 +7,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pointer_interceptor/pointer_interceptor.dart';
-
-import 'package:webviewx/src/utils/dart_ui_fix.dart' as ui;
-import 'package:webviewx/src/utils/constants.dart';
-import 'package:webviewx/src/utils/logger.dart';
-import 'package:webviewx/src/utils/utils.dart';
 import 'package:webviewx/src/controller/impl/web.dart';
 import 'package:webviewx/src/controller/interface.dart' as ctrl_interface;
+import 'package:webviewx/src/utils/constants.dart';
+import 'package:webviewx/src/utils/dart_ui_fix.dart' as ui;
+import 'package:webviewx/src/utils/logger.dart';
+import 'package:webviewx/src/utils/utils.dart';
 import 'package:webviewx/src/view/interface.dart' as view_interface;
 
 /// Web implementation
@@ -46,7 +45,6 @@ class WebViewX extends StatefulWidget implements view_interface.WebViewX {
   final double minWidth;
   @override
   final double minHeight;
-
 
   /// Callback which returns a referrence to the [WebViewXController]
   /// being created.
@@ -226,7 +224,7 @@ class _WebViewXState extends State<WebViewX> {
 
       then?.call();
 
-      /* 
+      /*
       // Registering the same events as we already do inside
       // HtmlUtils.embedClickListenersInPageSource(), but in Dart.
       // So far it seems to be working, but needs more testing.
@@ -307,9 +305,15 @@ class _WebViewXState extends State<WebViewX> {
 
   @override
   Widget build(BuildContext context) {
-    final htmlElementView = SizedBox(
-      width: widget.maxWidth,
-      height: widget.maxHeight,
+    final htmlElementView = ConstrainedBox(
+      // width: widget.maxWidth,
+      // height: widget.maxHeight,
+      constraints: BoxConstraints(
+        maxWidth: widget.maxWidth,
+        maxHeight: widget.maxHeight,
+        minWidth: widget.minWidth,
+        minHeight: widget.minHeight,
+      ),
       child: AbsorbPointer(
         child: RepaintBoundary(
           child: HtmlElementView(
@@ -357,12 +361,16 @@ class _WebViewXState extends State<WebViewX> {
       ..style.border = 'none'
       ..allowFullscreen = widget.webSpecificParams.webAllowFullscreenContent;
 
-    // if(widget.maxWidth != double.infinity) {
-    //   iframeElement.width = widget.maxWidth.toInt().toString();
-    // }
-    // if(widget.maxHeight != double.infinity) {
-    //   iframeElement.height = widget.maxHeight.toInt().toString();
-    // }
+    if (!widget.maxWidth.isInfinite) {
+      iframeElement.width = widget.maxWidth.toInt().toString();
+    } else {
+      iframeElement.width = 'auto';
+    }
+    if (!widget.maxHeight.isInfinite) {
+      iframeElement.height = widget.maxHeight.toInt().toString();
+    } else {
+      iframeElement.height = 'auto';
+    }
 
     widget.webSpecificParams.additionalSandboxOptions.forEach(
       iframeElement.sandbox!.add,
