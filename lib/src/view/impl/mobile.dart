@@ -226,29 +226,25 @@ class _WebViewXState extends State<WebViewX> {
         )
         .toSet();
 
-    return SizedBox(
-      width: widget.width,
-      height: widget.height,
-      child: IgnorePointer(
-        ignoring: _ignoreAllGestures,
-        child: wf.WebView(
-          key: widget.key,
-          initialUrl: _initialContent(),
-          javascriptMode: javascriptMode,
-          onWebViewCreated: onWebViewCreated,
-          javascriptChannels: javascriptChannels,
-          gestureRecognizers:
-              widget.mobileSpecificParams.mobileGestureRecognizers,
-          onPageStarted: widget.onPageStarted,
-          onPageFinished: widget.onPageFinished,
-          initialMediaPlaybackPolicy: initialMediaPlaybackPolicy,
-          onWebResourceError: onWebResourceError,
-          gestureNavigationEnabled:
-              widget.mobileSpecificParams.gestureNavigationEnabled,
-          debuggingEnabled: widget.mobileSpecificParams.debuggingEnabled,
-          navigationDelegate: navigationDelegate,
-          userAgent: widget.userAgent,
-        ),
+    return IgnorePointer(
+      ignoring: _ignoreAllGestures,
+      child: wf.WebView(
+        key: widget.key,
+        initialUrl: _initialContent(),
+        javascriptMode: javascriptMode,
+        onWebViewCreated: onWebViewCreated,
+        javascriptChannels: javascriptChannels,
+        gestureRecognizers:
+        widget.mobileSpecificParams.mobileGestureRecognizers,
+        onPageStarted: widget.onPageStarted,
+        onPageFinished: widget.onPageFinished,
+        initialMediaPlaybackPolicy: initialMediaPlaybackPolicy,
+        onWebResourceError: onWebResourceError,
+        gestureNavigationEnabled:
+        widget.mobileSpecificParams.gestureNavigationEnabled,
+        debuggingEnabled: widget.mobileSpecificParams.debuggingEnabled,
+        navigationDelegate: navigationDelegate,
+        userAgent: widget.userAgent,
       ),
     );
   }

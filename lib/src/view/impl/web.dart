@@ -300,15 +300,11 @@ class _WebViewXState extends State<WebViewX> {
 
   @override
   Widget build(BuildContext context) {
-    final htmlElementView = SizedBox(
-      width: widget.width,
-      height: widget.height,
-      child: AbsorbPointer(
-        child: RepaintBoundary(
-          child: HtmlElementView(
-            key: widget.key,
-            viewType: iframeViewType,
-          ),
+    final htmlElementView = AbsorbPointer(
+      child: RepaintBoundary(
+        child: HtmlElementView(
+          key: widget.key,
+          viewType: iframeViewType,
         ),
       ),
     );
