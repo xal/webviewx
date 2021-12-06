@@ -80,8 +80,10 @@ class _WebViewXPageState extends State<WebViewXPage> {
       key: const ValueKey('webviewx'),
       initialContent: initialContent,
       initialSourceType: SourceType.html,
-      height: screenSize.height / 2,
-      width: min(screenSize.width * 0.8, 1024),
+      minWidth: 0,
+      minHeight: 0,
+      maxHeight: screenSize.height / 2,
+      maxWidth: min(screenSize.width * 0.8, 1024),
       onWebViewCreated: (controller) => webviewController = controller,
       onPageStarted: (src) =>
           debugPrint('A new page has started loading: $src\n'),

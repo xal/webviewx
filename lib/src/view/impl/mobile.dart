@@ -33,11 +33,16 @@ class WebViewX extends StatefulWidget implements view_interface.WebViewX {
 
   /// Widget width
   @override
-  final double width;
+  final double maxWidth;
 
   /// Widget height
   @override
-  final double height;
+  final double maxHeight;
+
+  @override
+  final double minWidth;
+  @override
+  final double minHeight;
 
   /// Callback which returns a referrence to the [WebViewXController]
   /// being created.
@@ -112,8 +117,10 @@ class WebViewX extends StatefulWidget implements view_interface.WebViewX {
     this.initialContent = 'about:blank',
     this.initialSourceType = SourceType.url,
     this.userAgent,
-    required this.width,
-    required this.height,
+    required this.maxWidth,
+    required this.maxHeight,
+    required this.minWidth,
+    required this.minHeight,
     this.onWebViewCreated,
     this.jsContent = const {},
     this.dartCallBacks = const {},
@@ -226,9 +233,13 @@ class _WebViewXState extends State<WebViewX> {
         )
         .toSet();
 
-    return SizedBox(
-      width: widget.width,
-      height: widget.height,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: widget.maxWidth,
+        maxHeight: widget.maxHeight,
+        minWidth: widget.minWidth,
+        minHeight: widget.minHeight,
+      ),
       child: IgnorePointer(
         ignoring: _ignoreAllGestures,
         child: wf.WebView(

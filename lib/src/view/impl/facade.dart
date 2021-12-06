@@ -24,11 +24,16 @@ class WebViewX extends StatelessWidget implements view_interface.WebViewX {
 
   /// Widget width
   @override
-  final double width;
+  final double maxWidth;
 
   /// Widget height
   @override
-  final double height;
+  final double maxHeight;
+
+  @override
+  final double minWidth;
+  @override
+  final double minHeight;
 
   /// Callback which returns a referrence to the [WebViewXController]
   /// being created.
@@ -103,8 +108,10 @@ class WebViewX extends StatelessWidget implements view_interface.WebViewX {
     this.initialContent = 'about:blank',
     this.initialSourceType = SourceType.url,
     this.userAgent,
-    required this.width,
-    required this.height,
+    required this.maxWidth,
+    required this.maxHeight,
+    required this.minHeight,
+    required this.minWidth,
     this.onWebViewCreated,
     this.jsContent = const {},
     this.dartCallBacks = const {},
