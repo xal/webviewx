@@ -18,10 +18,10 @@ abstract class WebViewX {
   final String? userAgent;
 
   /// Widget width
-  final double width;
+  final double? width;
 
   /// Widget height
-  final double height;
+  final double? height;
 
   /// Callback which returns a referrence to the [IWebViewXController]
   /// being created.
