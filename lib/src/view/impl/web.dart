@@ -355,9 +355,14 @@ class _WebViewXState extends State<WebViewX> {
       ..id = 'id_$iframeViewType'
       ..name = 'name_$iframeViewType'
       ..style.border = 'none'
-      ..width = widget.maxWidth.toInt().toString()
-      ..height = widget.maxHeight.toInt().toString()
       ..allowFullscreen = widget.webSpecificParams.webAllowFullscreenContent;
+
+    if(widget.maxWidth != double.infinity) {
+      iframeElement.width = widget.maxWidth.toInt().toString();
+    }
+    if(widget.maxHeight != double.infinity) {
+      iframeElement.height = widget.maxHeight.toInt().toString();
+    }
 
     widget.webSpecificParams.additionalSandboxOptions.forEach(
       iframeElement.sandbox!.add,
